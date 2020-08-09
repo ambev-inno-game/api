@@ -1,7 +1,9 @@
 import HttpStatus from 'http-status-codes'
 
+const INVALID_DATA_MESSAGE = 'Dados inválidos.'
+
 export class BadRequestError extends Error {
-  constructor(message, originalError) {
+  constructor(message = INVALID_DATA_MESSAGE, originalError) {
     super(message)
     this.name = this.constructor.name
     this.message = message
