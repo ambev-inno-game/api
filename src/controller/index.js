@@ -7,7 +7,7 @@ import { userController } from './user'
 
 const baseRoute = express.Router()
 baseRoute.get('/', (req, res) => {
-  res.send('Condominium')
+  res.send('BATATA')
 })
 
 export function configRoutes(app) {
