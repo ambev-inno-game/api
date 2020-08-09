@@ -2,7 +2,7 @@ import { Pool } from 'pg'
 
 const POOL = new Pool({
   user: process.env.PGUSER,
-  host: process.env.PGHOST,
+  host: process.env.DATABASE_URL,
   database: process.env.PGDATABASE,
   password: process.env.PGPASSWORD,
   port: process.env.PGPORT,

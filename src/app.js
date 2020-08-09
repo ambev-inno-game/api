@@ -5,7 +5,7 @@ import express from 'express'
 import { configRoutes } from './controller/index'
 import { errorHandlingMiddleware } from './middleware/errorHandling'
 
-const PORT = process.env.PORT || 4001
+const PORT = process.env.PORT || 8000
 const app = express()
 
 app.use(bodyParser.json({ limit: '1.1mb' }))
