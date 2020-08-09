@@ -3,6 +3,7 @@ import express from 'express'
 import { authController } from './auth'
 import { loginController } from './login'
 import { townhouseController } from './townhouse'
+import { homeController } from './home'
 
 const baseRoute = express.Router()
 baseRoute.get('/', (req, res) => {
@@ -14,4 +15,5 @@ export function configRoutes(app) {
   app.use(authController)
   app.use(loginController)
   app.use(townhouseController)
+  app.use(homeController)
 }

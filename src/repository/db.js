@@ -1,11 +1,23 @@
 import { Pool } from 'pg'
 
-const POOL = new Pool({
+const prodConfig = {
   connectionString: process.env.DATABASE_URL,
   ssl: {
     rejectUnauthorized: false
   }
-})
+}
+
+const localConfig = {
+  user: process.env.PGUSER,
+  host: process.env.DATABASE_URL,
+  database: process.env.PGDATABASE,
+  password: process.env.PGPASSWORD,
+  port: process.env.PGPORT,
+}
+
+// gambi
+const isDev = process.env.ENVIRONMENT === 'dev'
+const POOL = new Pool(isDev ? localConfig : prodConfig)
 
 export async function executeQuery(query) {
   try {
