@@ -1,4 +1,4 @@
-import { AsAbstractModel } from '../common/asAbstractModel'
+import { AsAbstractModel } from '../common/ambevAbstractModel'
 
 export class TownhouseModel extends AsAbstractModel {
   constructor(data = {}) {
