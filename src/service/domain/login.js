@@ -1,5 +1,5 @@
 import { BadRequestError } from '../../errors/badRequestError'
-// import { findUserByEmail } from '../../repository/user/user'
+import { findUserByEmail } from '../../repository/user/user'
 import { createLoggedToken } from '../general/auth'
 import { encryptText } from '../general/encrypt'
 
@@ -12,8 +12,7 @@ function validateLoginData(email, password) {
 export async function login({ email, password }) {
   validateLoginData(email, password)
   const encryptedPassword = encryptText(password)
-  // const [user] = await findUserByEmail(email)
-  const [user] = null
+  const [user] = await findUserByEmail(email)
 
   if (!user || user.password !== encryptedPassword) throw new BadRequestError(INVALID_LOGIN_MESSAGE)
 
