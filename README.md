@@ -10,7 +10,7 @@ BATATA
     - [- Naming branches](#ullinaming-branchesliul)
     - [- Commiting](#ullicommitingliul)
     - [- Openning pull requests](#ulliopenning-pull-requestsliul)
-  - [:squirrel: Mantainers](#squirrel-mantainers)
+  - [:computer: Mantainers](#computer-mantainers)
 
 ## :ocean: Gitflow
 
@@ -68,7 +68,7 @@ After finishing your work you are able to open a pull request. You need to follo
 
 - Labels: Add the right lebels, it depends on your branch name, each one have his corespondent label on our repository.
 
-## :squirrel: Mantainers
+## :computer: Mantainers
 
 - [Emilio Heinzmann](https://github.com/emilioheinz)
 - [Rhian Lopes](https://github.com/RhianLopes)
