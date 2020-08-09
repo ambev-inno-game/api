@@ -1,11 +1,10 @@
 import { Pool } from 'pg'
 
 const POOL = new Pool({
-  user: process.env.PGUSER,
-  host: process.env.DATABASE_URL,
-  database: process.env.PGDATABASE,
-  password: process.env.PGPASSWORD,
-  port: process.env.PGPORT,
+  connectionString: process.env.DATABASE_URL,
+  ssl: {
+    rejectUnauthorized: false
+  }
 })
 
 export async function executeQuery(query) {
