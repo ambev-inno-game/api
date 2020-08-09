@@ -1,6 +1,6 @@
-import { AsAbstractModel } from '../common/ambevAbstractModel'
+import { AmbevAbstractModel } from '../common/ambevAbstractModel'
 
-export class TownhouseModel extends AsAbstractModel {
+export class TownhouseModel extends AmbevAbstractModel {
   constructor(data = {}) {
     super(data)
     this.id = data.id

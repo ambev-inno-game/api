@@ -3,7 +3,6 @@ import express from 'express'
 import { authController } from './auth'
 import { loginController } from './login'
 import { townhouseController } from './townhouse'
-import { userController } from './user'
 
 const baseRoute = express.Router()
 baseRoute.get('/', (req, res) => {
