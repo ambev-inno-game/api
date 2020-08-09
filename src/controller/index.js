@@ -13,6 +13,5 @@ export function configRoutes(app) {
   app.use(baseRoute)
   app.use(authController)
   app.use(loginController)
-  app.use(userController)
   app.use(townhouseController)
 }
