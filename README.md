@@ -1,10 +1,10 @@
-# :department_store: Alô Síndico
+# :department_store: Assina Ambev
 
 BATATA
 
 ## :pushpin: Summary
 
-- [:department_store: Alô Síndico](#department_store-alô-síndico)
+- [:department_store: Assina Ambev](#department_store-assina-ambev)
   - [:pushpin: Summary](#pushpin-summary)
   - [:ocean: Gitflow](#ocean-gitflow)
     - [- Naming branches](#ullinaming-branchesliul)
