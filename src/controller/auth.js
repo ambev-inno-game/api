@@ -1,23 +1,16 @@
 import express from 'express'
 
 import { asyncWrapper } from '../middleware/asyncWrapper'
-import { createAnonymousToken, refreshLoggedToken } from '../service/general/auth'
+import { authAnonymous } from '../middleware/authHandling'
+import { refreshToken } from '../service/general/auth'
 
 const authController = express.Router()
 
 authController.post(
-  '/auth',
-  asyncWrapper(async (req, res) => {
-    const token = await createAnonymousToken(req.body)
-    res.json(token)
-  })
-)
-
-authController.post(
   '/auth/refresh',
+  authAnonymous,
   asyncWrapper(async (req, res) => {
-    const token = await refreshLoggedToken(req.body)
-    res.json(token)
+    res.json(await refreshToken(req.body))
   })
 )
 

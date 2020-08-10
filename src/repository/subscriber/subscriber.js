@@ -1,4 +1,5 @@
 import { executeParametrizedQuery } from '../db'
+import { SubscriberModel } from './subscriberModel'
 
 export async function save(subscriber) {
   const subscriberQuery = `INSERT INTO ambev_subscriber (name, child_count, adult_count) VALUES ($1, $2, $3) RETURNING id`
@@ -15,4 +16,19 @@ export async function save(subscriber) {
   });
 
   await Promise.all(preferencesInsertionPromises)
+  return insertedId
+}
+
+export async function findByUserId(userId) {
+  const query = 'SELECT * FROM ambev_subscriber WHERE user_id = $1'
+  const params = [userId]
+  const response = await executeParametrizedQuery(query, params)
+  return new SubscriberModel(response.rows[0])
+}
+
+export async function findById(id) {
+  const query = 'SELECT * FROM ambev_subscriber WHERE id = $1'
+  const params = [id]
+  const response = await executeParametrizedQuery(query, params)
+  return new SubscriberModel(response.rows[0])
 }
