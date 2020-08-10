@@ -1,11 +1,11 @@
 import { AUTH_LEVEL } from '../constants/index'
-import { validateToken, getTokenFromHeaders } from '../service/general/auth'
+import { validateAuth, getTokenFromHeaders } from '../service/general/auth'
 import { BadRequestError } from '../errors/badRequestError'
 
-async function auth(req, next, desiredLevel) {
+async function auth(req, next, desiredLevels) {
   try {
     const token = getTokenFromHeaders(req.headers)
-    await validateToken({ token, desiredLevel })
+    await validateAuth({ token, desiredLevels })
     next()
   } catch (err) {
     err.message = `Invalid token!: ${err.message}`

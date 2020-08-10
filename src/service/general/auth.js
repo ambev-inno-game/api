@@ -40,5 +40,10 @@ export async function refreshToken({ refreshToken }) {
       return refreshSubscription(tokenData)
     default:
       throw new ForbiddenAccessError('Nível de autenticação insuficiente')
-  }
+  } 
+}
+
+export function getTokenFromHeaders(headers) {
+  const tokenHeaders = headers.authorization || ''
+  return tokenHeaders.replace('Bearer ', '')
 }
