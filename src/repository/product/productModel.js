@@ -4,7 +4,7 @@ export class ProductModel extends AmbevAbstractModel {
   constructor(data = {}) {
     super(data)
     this.id = data.id
-    this.category = data.category
+    this.categoryId = data.categoryId
     this.title = data.title
     this.description = data.description
     this.imageLink = data.imageLink
@@ -16,7 +16,7 @@ export class ProductModel extends AmbevAbstractModel {
   toDto() {
     return {
       id: this.id,
-      category: this.category,
+      categoryId: this.categoryId,
       title: this.title,
       description: this.description,
       imageLink: this.imageLink,
@@ -29,7 +29,7 @@ export class ProductModel extends AmbevAbstractModel {
   static fromDb(data = {}) {
     return new ProductModel({
       id: data.id,
-      category: data.category,
+      categoryId: data.category_id,
       title: data.title,
       description: data.product_description,
       imageLink: data.image_link,

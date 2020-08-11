@@ -2,12 +2,13 @@ import { executeParametrizedQuery } from '../db'
 import { ProductModel } from './productModel'
 
 export async function loadByCategories(categories) {
-  let query = `SELECT * FROM ambev_product WHERE category IN (`
+  let query = `SELECT * FROM ambev_product WHERE category_id IN (`
   const params = []
+
   categories.forEach((category, index) => {
     if(index > 0) query += `, `
     query += `$${index + 1}`
-    params.push(category)
+    params.push(category.id)
   })
   query += `)`
 

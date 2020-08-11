@@ -9,11 +9,11 @@ export async function listBySubscription({ subscriberId }) {
   const preferences = await loadBySubscriberId(subscriberId)
   if (!preferences || !preferences.length) throw new BadRequestError('Assinante inválido!')
 
-  const suggestedCategories = getSuggestedCategories(preferences)
+  const suggestedCategories = await getSuggestedCategories(preferences)
   const products = await loadByCategories(suggestedCategories)
 
   return suggestedCategories.map(category => ({
     category,
-    products: products.filter(product => product.category === category)
+    products: products.filter(product => product.categoryId === category.id)
   }))
 }

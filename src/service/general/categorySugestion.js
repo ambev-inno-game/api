@@ -1,18 +1,18 @@
-import { PREFERENCES, CATEGORIES } from '../../constants/index'
+import { loadAll } from '../../repository/category/category'
 
-export function getSuggestedCategories(preferenceList) {
-  const preferenceCategories = preferenceList.map(preference => Object.values(PREFERENCES).find(pref => preference.name === pref.name))
+export async function getSuggestedCategories(preferenceCategories) {
   const categoryScore = {}
+  const allCategories = await loadAll()
 
-  Object.values(CATEGORIES).forEach(category => {
+  allCategories.forEach(category => {
     let score = 0
 
     preferenceCategories.forEach(pref => {
-      const catPoint = pref.categoryPoints.find(catPoint => catPoint.categoryName === category)
-      if (catPoint) score += catPoint.score
+      const catScore = pref.categoryScore.find(catScore => catScore.categoryId === category.id)
+      if (catScore) score += catScore.score
     })
 
-    categoryScore[category] = { category, score }
+    categoryScore[category.title] = { category, score }
   })
 
   const orderedCategories = Object.values(categoryScore).sort((catA, catB) => {
@@ -21,11 +21,11 @@ export function getSuggestedCategories(preferenceList) {
     if (catA.score < catB.score) return 1
 
     // 2 - orderBy category
-    if (catA.category > catB.category) return 1
-    if (catA.category < catB.category) return -1
+    if (catA.title > catB.title) return 1
+    if (catA.title < catB.title) return -1
 
     return 0
   })
 
-  return orderedCategories.map(cat => cat.category)
+  return orderedCategories.map(ordered => ordered.category)
 }
