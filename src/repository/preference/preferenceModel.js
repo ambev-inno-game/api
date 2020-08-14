@@ -35,16 +35,18 @@ export class PreferenceModel extends AmbevAbstractModel {
   constructor(data = {}) {
     super(data)
     this.id = data.id
-    this.name = data.name
-    this.description = data.description
-    this.categoryScore = data.categoryScore // PreferenceCategoryScoreModel
+    this.questionId = data.questionId
+    this.preference = data.preference
+    this.imgLink = data.imgLink
+    this.categoryScore = data.categoryScore // [ PreferenceCategoryScoreModel ]
   }
 
   toDto() {
     return {
       id: this.id,
-      name: this.name,
-      description: this.description,
+      questionId: this.questionId,
+      preference: this.preference,
+      imgLink: this.imgLink,
       categoryScore: this.categoryScore
     }
   }
@@ -52,8 +54,35 @@ export class PreferenceModel extends AmbevAbstractModel {
   static fromDb(data = {}) {
     return new PreferenceModel({
       id: data.id,
-      name: data.preference_name,
-      description: data.preference_description
+      questionId: data.question_id,
+      preference: data.preference,
+      imgLink: data.img_link
+    })
+  }
+}
+
+export class PreferenceQuestionModel extends AmbevAbstractModel {
+  constructor(data = {}) {
+    super(data)
+    this.id = data.id
+    this.title = data.title
+    this.question = data.question
+    this.options = data.options // [ PreferenceModel ]
+  }
+
+  toDto() {
+    return {
+      id: this.id,
+      title: this.title,
+      question: this.question
+    }
+  }
+
+  static fromDb(data = {}) {
+    return new PreferenceQuestionModel({
+      id: data.id,
+      title: data.title,
+      question: data.question
     })
   }
 }

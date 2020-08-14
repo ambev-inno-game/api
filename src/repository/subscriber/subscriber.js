@@ -2,8 +2,8 @@ import { executeParametrizedQuery } from '../db'
 import { SubscriberModel } from './subscriberModel'
 
 export async function save(subscriber) {
-  const subscriberQuery = `INSERT INTO ambev_subscriber (name, child_count, adult_count) VALUES ($1, $2, $3) RETURNING id`
-  const subscriberParams = [subscriber.name, subscriber.childCount, subscriber.adultCount]
+  const subscriberQuery = `INSERT INTO ambev_subscriber (name, people_count) VALUES ($1, $2) RETURNING id`
+  const subscriberParams = [subscriber.name, subscriber.peopleCount]
   const results = await executeParametrizedQuery(subscriberQuery, subscriberParams)
   const insertedId = results.rows[0].id
 

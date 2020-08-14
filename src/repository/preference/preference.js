@@ -1,5 +1,5 @@
-import { executeParametrizedQuery } from '../db'
-import { PreferenceModel, PreferenceCategoryScoreModel } from './preferenceModel'
+import { executeParametrizedQuery, executeQuery } from '../db'
+import { PreferenceModel, PreferenceCategoryScoreModel, PreferenceQuestionModel } from './preferenceModel'
 
 export async function loadBySubscriberId(subscriberId) {
   const query = `SELECT pre.* FROM ambev_preference pre ` +
@@ -17,7 +17,7 @@ export async function loadBySubscriberId(subscriberId) {
     const scoreParams = []
 
     preferences.forEach((pref, index) => {
-      if(index > 0) scoreQuery += `, `
+      if (index > 0) scoreQuery += `, `
       scoreQuery += `$${index + 1}`
       scoreParams.push(pref.id)
     })
@@ -31,4 +31,31 @@ export async function loadBySubscriberId(subscriberId) {
   }
 
   return preferences
+}
+
+export async function loadAllGroupedByQuestion() {
+  const questionQuery = `SELECT * FROM ambev_preference_question`
+  const questionResult = await executeQuery(questionQuery)
+  const questions = questionResult.rows.map(row => PreferenceQuestionModel.fromDb(row))
+
+  let preferenceQuery = `SELECT * FROM ambev_preference WHERE question_id IN (`
+  const preferenceParams = []
+
+  // gambi
+  if (questions && questions.length) {
+    questions.forEach((question, index) => {
+      if (index > 0) preferenceQuery += `, `
+      preferenceQuery += `$${index + 1}`
+      preferenceParams.push(question.id)
+    })
+    preferenceQuery += `)`
+
+    const preferenceResponse = await executeParametrizedQuery(preferenceQuery, preferenceParams)
+    const preferences = preferenceResponse.rows.map(row => PreferenceModel.fromDb(row))
+    questions.forEach(question => {
+      question.options = preferences.filter(pref => pref.questionId === question.id)
+    })
+  }
+
+  return questions
 }

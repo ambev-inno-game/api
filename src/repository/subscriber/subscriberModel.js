@@ -6,8 +6,7 @@ export class SubscriberModel extends AmbevAbstractModel {
     super(data)
     this.id = data.id
     this.name = data.name
-    this.childCount = data.childCount
-    this.adultCount = data.adultCount
+    this.peopleCount = data.peopleCount
     this.preferences = data.preferences && data.preferences.map(pref => new PreferenceModel(pref))
   }
 
@@ -15,8 +14,7 @@ export class SubscriberModel extends AmbevAbstractModel {
     return {
       id: this.id,
       name: this.name,
-      childCount: this.childCount,
-      adultCount: this.adultCount,
+      peopleCount: this.peopleCount,
       preferences: this.preferences.map(pref => pref.toDto())
     }
   }
@@ -25,8 +23,7 @@ export class SubscriberModel extends AmbevAbstractModel {
     return new SubscriberModel({
       id: data.id,
       name: data.name,
-      childCount: data.child_count,
-      adultCount: data.adult_count
+      peopleCount: data.people_count
     })
   }
 }
