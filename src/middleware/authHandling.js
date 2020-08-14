@@ -13,8 +13,12 @@ async function auth(req, next, desiredLevels) {
 }
 
 export async function authAnonymous(req, res, next) {
-  validateApiKey(req.headers)
-  next()
+  try {
+    validateApiKey(req.headers.apikey)
+    next()
+  } catch(err) {
+    next(err)
+  }
 }
 
 export async function authLogged(req, res, next) {
