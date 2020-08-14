@@ -1,6 +1,5 @@
 import { AUTH_LEVEL } from '../constants/index'
-import { validateAuth, getTokenFromHeaders } from '../service/general/auth'
-import { BadRequestError } from '../errors/badRequestError'
+import { validateAuth, getTokenFromHeaders, validateApiKey } from '../service/general/auth'
 
 async function auth(req, next, desiredLevels) {
   try {
@@ -14,9 +13,7 @@ async function auth(req, next, desiredLevels) {
 }
 
 export async function authAnonymous(req, res, next) {
-  const { apiKey } = req.body
-  if(!apiKey || !apiKey.length) next(new BadRequestError('Chave de API inválida'))
-
+  validateApiKey(req.headers)
   next()
 }
 

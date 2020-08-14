@@ -7,7 +7,7 @@ import { refreshSubscription } from '../domain/subscriber'
 
 const { API_KEY, JWT_REFRESH_DURATION = "30d" } = process.env
 
-function validateApiKey(apiKey) {
+export function validateApiKey({ apiKey }) {
   if (apiKey !== API_KEY) throw new BadRequestError('Chave de API inválida')
 }
 
@@ -18,7 +18,7 @@ export function safeCreateAuth(options) {
 }
 
 export function createAuth({ apiKey, options }) {
-  validateApiKey(apiKey)
+  validateApiKey({ apiKey })
   return safeCreateAuth(options)
 }
 
