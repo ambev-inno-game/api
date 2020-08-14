@@ -5,7 +5,7 @@ import { createToken, verifyToken } from './token'
 import { refreshLogin } from '../domain/login'
 import { refreshSubscription } from '../domain/subscriber'
 
-const { API_KEY, JWT_REFRESH_DURATION = 43800 } = process.env
+const { API_KEY, JWT_REFRESH_DURATION = "30d" } = process.env
 
 function validateApiKey(apiKey) {
   if (apiKey !== API_KEY) throw new BadRequestError('Chave de API inválida')

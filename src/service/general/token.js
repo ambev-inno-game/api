@@ -2,14 +2,10 @@ import jwt from 'jsonwebtoken'
 
 import { ForbiddenAccessError } from '../../errors/forbiddenAccessError'
 
-const { JWT_SECRET, JWT_DURATION = 20 } = process.env
+const { JWT_SECRET, JWT_DURATION = "20m" } = process.env
 
-function getTokenDurationFromMinutes(duration) {
-  return duration || JWT_DURATION * 60
-}
-
-export function createToken(data, duration) {
-  return jwt.sign(data, JWT_SECRET, { expiresIn: getTokenDurationFromMinutes(duration) })
+export function createToken(data, duration = JWT_DURATION) {
+  return jwt.sign(data, JWT_SECRET, { expiresIn: duration })
 }
 
 export function verifyToken({ token, ignoreExpiration = false }) {
