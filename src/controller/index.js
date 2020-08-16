@@ -4,7 +4,6 @@ import { authController } from './auth'
 import { loginController } from './login'
 import { homeController } from './home'
 import { subscriberController } from './subscriber'
-import { productController } from './product'
 import { preferenceController } from './preference'
 
 const baseRoute = express.Router()
@@ -18,6 +17,5 @@ export function configRoutes(app) {
   app.use(loginController)
   app.use(homeController)
   app.use(subscriberController)
-  app.use(productController)
   app.use(preferenceController)
 }
